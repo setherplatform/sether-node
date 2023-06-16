@@ -21,7 +21,6 @@ import (
 	"math"
 	"math/big"
 	"math/rand"
-	"time"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/state"
@@ -32,7 +31,7 @@ import (
 	"github.com/setherplatform/sether-node/inter"
 )
 
-var FakeGenesisTime = inter.FromUnix(time.Now().Unix())
+var FakeGenesisTime = inter.Timestamp(1686907904)
 
 // ApplyFakeGenesis writes or updates the genesis block in db.
 func ApplyFakeGenesis(statedb *state.StateDB, time inter.Timestamp, balances map[common.Address]*big.Int) (*EvmBlock, error) {
