@@ -27,6 +27,7 @@ import (
 	"io"
 	"math/big"
 	"os"
+	"time"
 )
 
 var genesisTypeFlag = cli.StringFlag{
@@ -60,44 +61,44 @@ type GenesisAccount struct {
 var (
 	TestnetValidators = []GenesisValidator{
 		{
-			addr:    "0xf9215294250dF0D4Beb912C8e18F1e1416d6A398",
-			pubkey:  "0xc004135f0d5860bc30341d22cc44f3007d0bf35ee815cc827215c96d7d9aba0fb906c5e8c6eb651cf24625b9151cb2e919259b4f006301292d158e5415d66564b81e",
-			stake:   utils2.ToSeth(1_000_000), // min stake StakerConstants.sol -> minSelfStake
-			balance: utils2.ToSeth(0),
+			addr:    "0x020A61B6922FEe79C0A8f0A5E342eae359cC1733",
+			pubkey:  "0xc0043a2d7348d04d235d381240cee43b9f0a042422223bc9068b3a4a106a6d39cb41c97648f703ebfa6444c104e3ec116d761873360db7fd79d2072af53a447519af",
+			stake:   utils2.ToSeth(100_000),
+			balance: utils2.ToSeth(10_000_000),
 		},
 		{
-			addr:    "0x594f344E2B6662C4b6c5A07B6b1287c6209c9c22",
-			pubkey:  "0xc00459be00a14b8bd3b249ab7914e44f5c8e01be92aeafc51ec07f523c965cd74bc821cd7389c2ee9d87aaea327c13b6e4027c9cfcc651ef9b52a2adaeb69e6d6142",
-			stake:   utils2.ToSeth(1_000_000), // min stake StakerConstants.sol -> minSelfStake
-			balance: utils2.ToSeth(0),
+			addr:    "0x11eF7f4B6B10b1a70E33B54cDe7b87F7e13e5400",
+			pubkey:  "0xc00403d3747695ba5806f7222d0aaacc9c44c238c6a5cfba55aadd53a414b42215142ac2a03d6597c59e22eb155ce2402d6fba0b9a3bb70e57c7409667050ae192ab",
+			stake:   utils2.ToSeth(100_000),
+			balance: utils2.ToSeth(10_000_000),
 		},
 		{
-			addr:    "0x280620317a56474ABCcc05d7Af612C8D11956611",
-			pubkey:  "0xc0047a6230b289af747663ccff2c95edd2061b029b4e888847b2b8aed005e22daafe9a39f1bb5f12044adc25a3e8e733bb7b62088b746eec8ed2fee9e131ece5e907",
-			stake:   utils2.ToSeth(1_000_000),
-			balance: utils2.ToSeth(0), // min stake StakerConstants.sol -> minSelfStake
+			addr:    "0xF1864f7268F51D4a0D472dEFD80B697FCCbff99D",
+			pubkey:  "0xc004e10005419e6baeeaf780e89035bdffaea88f9e2565a7cfb07fa715a573da7f50ec67669decad1dba586c2b6812e095fe886c2ee275e43780dbac6ceba6e7104c",
+			stake:   utils2.ToSeth(100_000),
+			balance: utils2.ToSeth(10_000_000),
 		},
 	}
 
 	TestnetAccounts = []GenesisAccount{
 		{
-			addr:    "0x01D4d20f19315D78f5E942029345dad1e85fce55",
-			balance: utils2.ToSeth(10_000_000),
+			addr:    "0x32f6CCc1aBFb13c2515d403D9e80eD2205E57Af0",
+			balance: utils2.ToSeth(20_000_000),
 		},
 		{
-			addr:    "0x4a14c36f2A8D73525D44E70Fa2EaA2483A916690",
-			balance: utils2.ToSeth(10_000_000),
+			addr:    "0x15C13D817c531035930fE24a68a6D1CC1A2eA4ed",
+			balance: utils2.ToSeth(20_000_000),
 		},
 		{
-			addr:    "0x349e543718458B46244f958e7BA4a5c2848F9c78",
-			balance: utils2.ToSeth(10_000_000),
+			addr:    "0x619a877Db76824734B066f4275CDa78E02910567",
+			balance: utils2.ToSeth(20_000_000),
 		},
 	}
 
 	MainnetValidators = []GenesisValidator{}
 	MainnetAccounts   = []GenesisAccount{}
 
-	GenesisTime = inter.FromUnix(1677067996)
+	GenesisTime = inter.Timestamp(time.Now().UnixNano())
 )
 
 func createGenesisCmd(ctx *cli.Context) error {
