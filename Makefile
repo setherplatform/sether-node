@@ -12,6 +12,11 @@ sether:
 	    -o build/sether \
 	    ./cmd/sether
 
+	go build \
+    	    -ldflags "-s -w -X github.com/setherplatform/sether-node/cmd/sether/launcher.gitCommit=$${GIT_COMMIT} -X github.com/setherplatform/sether-node/cmd/sether/launcher.gitDate=$${GIT_DATE}" \
+    	    -o build/devp2p \
+    	    ./cmd/devp2p
+
 .PHONY: clean
 clean:
 	rm -fr ./build/*
