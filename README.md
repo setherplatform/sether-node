@@ -7,7 +7,7 @@ provides native services for decentralized authentication, decentralized identit
 
 ## Building the source
 
-Building the `sether` requires both a Go (version 1.17 or later) and a C compiler. You can install
+Building the `sether` requires both a Go (version 1.14 or later) and a C compiler. You can install
 them using your favourite package manager. Once the dependencies are installed, run
 
 ```shell
