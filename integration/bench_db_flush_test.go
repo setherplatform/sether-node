@@ -29,7 +29,7 @@ func BenchmarkFlushDBs(b *testing.B) {
 		Lachesis:      abft.DefaultConfig(),
 		LachesisStore: abft.DefaultStoreConfig(cachescale.Identity),
 		VectorClock:   vecmt.DefaultConfig(cachescale.Identity),
-		DBs:           DefaultDBsConfig(cachescale.Identity.U64, 512),
+		DBs:           Pbl1DBsConfig(cachescale.Identity.U64, 512),
 	})
 	defer closeDBs()
 	defer store.Close()

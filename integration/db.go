@@ -25,10 +25,9 @@ import (
 )
 
 type DBsConfig struct {
-	Routing       RoutingConfig
-	RuntimeCache  DBsCacheConfig
-	GenesisCache  DBsCacheConfig
-	MigrationMode string
+	Routing      RoutingConfig
+	RuntimeCache DBsCacheConfig
+	GenesisCache DBsCacheConfig
 }
 
 type DBCacheConfig struct {
@@ -50,16 +49,12 @@ func SupportedDBs(chaindataDir string, cfg DBsCacheConfig) (map[multidb.TypeName
 	}
 
 	leveldbFsh := leveldb.NewProducer(path.Join(chaindataDir, "leveldb-fsh"), cacher)
-	leveldbFlg := leveldb.NewProducer(path.Join(chaindataDir, "leveldb-flg"), cacher)
-	leveldbDrc := leveldb.NewProducer(path.Join(chaindataDir, "leveldb-drc"), cacher)
 	pebbleFsh := pebble.NewProducer(path.Join(chaindataDir, "pebble-fsh"), cacher)
 	pebbleFlg := pebble.NewProducer(path.Join(chaindataDir, "pebble-flg"), cacher)
 	pebbleDrc := pebble.NewProducer(path.Join(chaindataDir, "pebble-drc"), cacher)
 
 	if metrics.Enabled {
 		leveldbFsh = WrapDatabaseWithMetrics(leveldbFsh)
-		leveldbFlg = WrapDatabaseWithMetrics(leveldbFlg)
-		leveldbDrc = WrapDatabaseWithMetrics(leveldbDrc)
 		pebbleFsh = WrapDatabaseWithMetrics(pebbleFsh)
 		pebbleFlg = WrapDatabaseWithMetrics(pebbleFlg)
 		pebbleDrc = WrapDatabaseWithMetrics(pebbleDrc)
@@ -67,15 +62,11 @@ func SupportedDBs(chaindataDir string, cfg DBsCacheConfig) (map[multidb.TypeName
 
 	return map[multidb.TypeName]kvdb.IterableDBProducer{
 			"leveldb-fsh": leveldbFsh,
-			"leveldb-flg": leveldbFlg,
-			"leveldb-drc": leveldbDrc,
 			"pebble-fsh":  pebbleFsh,
 			"pebble-flg":  pebbleFlg,
 			"pebble-drc":  pebbleDrc,
 		}, map[multidb.TypeName]kvdb.FullDBProducer{
 			"leveldb-fsh": flushable.NewSyncedPool(leveldbFsh, FlushIDKey),
-			"leveldb-flg": flaggedproducer.Wrap(leveldbFlg, FlushIDKey),
-			"leveldb-drc": &DummyScopedProducer{leveldbDrc},
 			"pebble-fsh":  asyncflushproducer.Wrap(flushable.NewSyncedPool(pebbleFsh, FlushIDKey), 200000),
 			"pebble-flg":  flaggedproducer.Wrap(pebbleFlg, FlushIDKey),
 			"pebble-drc":  &DummyScopedProducer{pebbleDrc},

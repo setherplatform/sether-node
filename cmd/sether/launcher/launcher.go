@@ -124,8 +124,6 @@ func initFlags() {
 		TraceNodeFlag,
 		SyncModeFlag,
 		GCModeFlag,
-		DBPresetFlag,
-		DBMigrationModeFlag,
 		genesisTypeFlag,
 		TestnetFlag,
 	}
