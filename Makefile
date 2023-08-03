@@ -28,7 +28,7 @@ clean:
 docker: docker_build docker_tag
 
 docker_build:
-	docker build --build-arg "GIT_COMMIT=$(GIT_COMMIT)" --build-arg "GIT_DATE=$(GIT_DATE)" . -t $(DOCKER_IMAGE)
+	docker build --network=host --build-arg "GIT_COMMIT=$(GIT_COMMIT)" --build-arg "GIT_DATE=$(GIT_DATE)" . -t $(DOCKER_IMAGE)
 
 docker_tag:
 	docker tag $(DOCKER_IMAGE) sether/node:latest
