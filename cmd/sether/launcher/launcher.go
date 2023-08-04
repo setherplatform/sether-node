@@ -324,6 +324,10 @@ func makeNode(ctx *cli.Context, cfg *config, genesisStore *genesisstore.Store) (
 		setBootnodes(ctx, bootnodes, &cfg.Node)
 	}
 
+	for _, bn := range cfg.Node.P2P.BootstrapNodes {
+		log.Info("Bootnode", "url", bn)
+	}
+
 	stack := makeConfigNode(ctx, &cfg.Node)
 
 	valKeystore := valkeystore.NewDefaultFileKeystore(path.Join(getValKeystoreDir(cfg.Node), "validator"))
