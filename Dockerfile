@@ -26,4 +26,4 @@ COPY --from=builder /sether/sether-node/build/sether /usr/local/bin/
 
 EXPOSE 6060 20545 20546
 
-ENTRYPOINT ["sether", "--datadir=/data", "--testnet", "--tracenode", "--genesis=/data/genesis.g", "--genesis.allowExperimental", "--verbosity=4", "--cache=3600", "--http", "--http.addr=0.0.0.0", "--http.corsdomain=*", "--http.api=eth,web3,net,txpool,abft,debug", "--ws", "--ws.addr=0.0.0.0", "--ws.origins=*", "--ws.api=eth,web3,net,txpool,abft,debug", "--validator.password=/data/password"]
+ENTRYPOINT ["sether", "--datadir=/data", "--testnet", "--tracenode", "--genesis=/data/genesis.g", "--genesis.allowExperimental", "--verbosity=4", "--cache=3600", "--http", "--http.addr=0.0.0.0", "--http.corsdomain=*", "--http.api=eth,web3,net,txpool,sethn,abft,debug", "--ws", "--ws.addr=0.0.0.0", "--ws.origins=*", "--ws.api=eth,web3,net,txpool,sethn,abft,debug", "--validator.password=/data/password"]
